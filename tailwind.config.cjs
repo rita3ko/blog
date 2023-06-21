@@ -13,6 +13,7 @@ module.exports = {
         current: "currentColor",
         primary: {
           blue: "rgb(var(--color-primary-blue) / <alpha-value>)",
+          pink: "rgb(var(--color-primary-pink) / <alpha-value>)",
           green: "rgb(var(--color-primary-green) / <alpha-value>)",
           yellow: "rgb(var(--color-primary-yellow) / <alpha-value>)",
         },
