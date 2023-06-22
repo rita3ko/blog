@@ -2,7 +2,7 @@
 external: false
 title: "Learning a new language in 2023"
 description: "Tools that could help you learn a language these days"
-date: 2023-06-23
+date: 2023-06-22
 draft: false
 ---
 Four years or so ago I set out to learn Spanish. I downloaded the Duolingo app from the app store, and started tapping away. A cheeky owl would remind me to clock in my daily practice, which I did on my way to work, and I managed to maintain a 100+ day streak. Spanish course complete, I booked a trip to Mexico to test drive my newly acquires skill.
