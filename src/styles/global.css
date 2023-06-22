@@ -131,7 +131,8 @@
     }
 
     a:not(.unset):hover {
-        color: theme('colors.text.link');
+        background: theme('colors.bg.selection');
+        color: theme('colors.text.selection');
     }
 
     code:not(pre code):not(.unset) {
