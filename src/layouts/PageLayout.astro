@@ -28,6 +28,18 @@ import Footer from "../components/Footer.astro";
     <GoogleFont />
     <ThemeScript />
     <FontAwesome />
+    <script>
+      (function () {
+          window.counterscale = {
+              q: [["set", "siteId", "rita-blog"], ["trackPageview"]],
+          };
+      })();
+    </script>
+    <script
+        id="counterscale-script"
+        src="https://counterscale.rita.workers.dev/tracker.js"
+        defer
+    ></script>
   </head>
 
   <body
