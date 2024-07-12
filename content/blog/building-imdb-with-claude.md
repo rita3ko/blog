@@ -102,7 +102,7 @@ Ah now I'm running into a CORS error
 ```
 
 Claude handled CORS better than most human developers I know:
-```
+
 To resolve this, you need to configure your Cloudflare Worker (your API) to allow requests from your frontend application. Here's how you can modify your API to handle CORS:
 
 1. Update your API code (likely in your `src/index.ts` or similar file in your `packages/api` directory):
@@ -127,7 +127,7 @@ app.use('/*', cors({
 
 export default app
 ```
-```
+
 
 ## Refactoring to a Monorepo: A Breeze
 
