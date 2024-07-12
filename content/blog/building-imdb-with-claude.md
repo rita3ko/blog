@@ -74,15 +74,15 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
 
 > 1. Specify the entry point in the command line:
    
-  >  Run the deploy command with the path to your main script, like this:
+  Run the deploy command with the path to your main script, like this:
 
    `wrangler deploy src/index.ts `
 
-   > Replace `src/index.ts` with the actual path to your main TypeScript file.
+   Replace `src/index.ts` with the actual path to your main TypeScript file.
 
-> 2. Specify the entry point in your `wrangler.toml` file:
+  2. Specify the entry point in your `wrangler.toml` file:
 
-   > Open your `wrangler.toml` file and add a `main` field that points to your entry file:
+    Open your `wrangler.toml` file and add a `main` field that points to your entry file:
 
 ```
    toml
