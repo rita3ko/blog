@@ -62,9 +62,7 @@ One of the most impressive aspects was how well the generated API worked right o
 
 When I encountered a small issue with running the Worker locally, I prompted Claude directly with the error I was receiving:
 
-```
-When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
-```
+> When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
 
 Claude quickly provided a solution:
 
