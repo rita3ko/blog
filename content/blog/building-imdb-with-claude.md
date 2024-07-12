@@ -5,19 +5,23 @@ description: "I recently built an IMDB-like application using Claude, an AI assi
 date: 2024-07-24
 draft: false
 ---
-I recently met with someone 
+I recently met with someone who was telling me about how they were using AI to build applications in new languages they'd never used before. I was intrigued, impressed, and even a little embarrassed that I wasn't flexing my AI muscles to the same extend. Meanwhile, as a manager, it's always hard to find time to build stuff, and when I do find a bit of time to spare, if it goes toward getting stuck, writing tedious boilerplate, or debugging minor issues, I rarely get to the gratifying part of shipping. 
 
-You can check out the final result here:
+Long story short, I've been pretty impressed with Anthropic's Claude lately and wanted to put it to the test by using it to build a full-stack application — obviously on the Cloudflare platform! I've never used Nuxt before, so I used that for the frontend (challenge of using new technology, accepted!). 
+
+I'll be honest, I was pretty impressed by how smooth this was. Sharing some of the details below. 
+
+BTW, can check out the final result here:
 - **Live Application:** [imdb.ritakozlov.com](https://imdb.ritakozlov.com)
 - **Source Code:** [github.com/rita3ko/imdb](https://github.com/rita3ko/imdb)
 
-Let me take you through my journey, complete with the actual prompts used and Claude's responses.
+Okay, so let me take you through my journey, complete with the actual prompts used and Claude's responses.
 
-## Getting Started: The Power of Prompts
+## Getting Started
 
 My journey began with a simple prompt:
 
-    Write me an API using Cloudflare Workers, Hono, TypeScript, and Cloudflare's D1 database for storing movies, the actors in them, and the synopsis of the movie.
+> Write me an API using Cloudflare Workers, Hono, TypeScript, and Cloudflare's D1 database for storing movies, the actors in them, and the synopsis of the movie.
 
 Claude's response was impressively comprehensive. Here's a snippet of the code it generated:
 
@@ -51,10 +55,12 @@ app.get('/movies', async (c) => {
 export default app
 ```
 
-This response included not just the code, but also instructions on how to set up the project, create the D1 database, and deploy the Worker.
+But there was a lot more — the response included not just the code, but also instructions on how to set up the project, create the D1 database, and deploy the Worker.
 
 ## The API: A Nearly Perfect First Try
-One of the most impressive aspects was how well the generated API worked right out of the gate. When I encountered a small issue with running the worker locally, I prompted Claude:
+One of the most impressive aspects was how well the generated API worked right out of the gate. No hallucinations or anything. 
+
+When I encountered a small issue with running the Worker locally, I prompted Claude directly with the error I was receiving:
 
 ```
 When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
@@ -62,21 +68,23 @@ When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: T
 
 Claude quickly provided a solution:
 
-```
+
 This error occurs because Wrangler can't find the entry point for your Worker. There are two ways to resolve this:
 
-1. Specify the entry point in the command line:
+
+> 1. Specify the entry point in the command line:
    
-   Run the deploy command with the path to your main script, like this:
+  >  Run the deploy command with the path to your main script, like this:
 
-   ` wrangler deploy src/index.ts `
+   `wrangler deploy src/index.ts `
 
-   Replace `src/index.ts` with the actual path to your main TypeScript file.
+   > Replace `src/index.ts` with the actual path to your main TypeScript file.
 
-2. Specify the entry point in your `wrangler.toml` file:
+> 2. Specify the entry point in your `wrangler.toml` file:
 
-   Open your `wrangler.toml` file and add a `main` field that points to your entry file:
+   > Open your `wrangler.toml` file and add a `main` field that points to your entry file:
 
+```
    toml
    name = "your-worker-name"
    main = "src/index.ts"
@@ -86,26 +94,37 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
    binding = "DB"
    database_name = "your_database_name"
    database_id = "your_database_id"
-   
-
-   Again, replace `src/index.ts` with the actual path to your main TypeScript file.
 ```
+
+   > Again, replace `src/index.ts` with the actual path to your main TypeScript file.
 
    This worked perfectly, like using Google + StackOverflow but you get to the answer faster.
 
-   ## Challenges and Iterations
+## Generating the UI
 
-While the API was nearly perfect, the frontend required more iteration. For instance, when setting up the Nuxt.js frontend, I encountered a CORS error. I prompted Claude:
+For the UI, I gave Claude the following prompt: 
+> can you add a ui that uses nuxt and shadcn?
 
-```
-Ah now I'm running into a CORS error
-```
+Not very verbose! 
+
+It came back with instructions on instantiating a Nuxt project, content to add to my CSS file, adding new pages such as `Pages/index.vue` for the meat of the application...
+
+At times it got a little lazy, for example, it generated the `Button` component for me but left me to my own devices for some of the others: 
+> Create similar files for Card, CardHeader, CardTitle, and CardContent components in the `components/ui` directory.
+
+So I asked it to generate those for me in a follow up prompt. 
+
+## Challenges and Iterations
+
+While the API was nearly perfect, the frontend required more iteration. For instance, when setting up the Nuxt.js frontend, I encountered a CORS error (classic!). I prompted:
+
+> Ah now I'm running into a CORS error
 
 Claude handled CORS better than most human developers I know:
 
-To resolve this, you need to configure your Cloudflare Worker (your API) to allow requests from your frontend application. Here's how you can modify your API to handle CORS:
+> To resolve this, you need to configure your Cloudflare Worker (your API) to allow requests from your frontend application. Here's how you can modify your API to handle CORS:
 
-1. Update your API code (likely in your `src/index.ts` or similar file in your `packages/api` directory):
+> 1. Update your API code (likely in your `src/index.ts` or similar file in your `packages/api` directory):
 
 ```typescript
 import { Hono } from 'hono'
@@ -128,11 +147,16 @@ app.use('/*', cors({
 export default app
 ```
 
+There were a couple snags I ran into with local dev but all in all manageable. I expected more hallucinations, but was impressed that for the most part there were none, or just minor ones (like when I ran into some wrangler error it suggested running it with a `--verbose` flag which does not really exist). 
 
-## Refactoring to a Monorepo: A Breeze
+## Breezing through refactoring into a monorepo
 
-Since we built the API first, it was managed in an entirely separate directory but I wanted it to be part of a single cohesive project. Claude handled this too pretty well. I asked it to give me step by step instructions so I didn't have to meddle with manually moving around files and folders: 
+Since we built the API first, it was managed in an entirely separate directory but I wanted it to be part of a single cohesive project. Claude handled this too pretty well. I asked it to give me step by step instructions so I didn't have to meddle with manually moving around files and folders.
 
+Prompt: 
+> can you give me the commands to move the api directory structure i've already created to the new monorepo folder?
+
+Output: 
 ```
 mkdir imdb-monorepo
 cd imdb-monorepo
