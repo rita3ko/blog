@@ -64,23 +64,7 @@ When I encountered a small issue with running the Worker locally, I prompted Cla
 
 > When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
 
-Claude quickly provided a solution:
-
-
-This error occurs because Wrangler can't find the entry point for your Worker. There are two ways to resolve this:
-
-
-1. Specify the entry point in the command line:
-   
-  Run the deploy command with the path to your main script, like this:
-
-   `wrangler deploy src/index.ts `
-
-   Replace `src/index.ts` with the actual path to your main TypeScript file.
-
-2. Specify the entry point in your `wrangler.toml` file:
-
-    Open your `wrangler.toml` file and add a `main` field that points to your entry file:
+Claude's response was legit, helping me update my wrangler.toml:
 
 ```toml
    name = "your-worker-name"
@@ -93,9 +77,7 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
    database_id = "your_database_id"
 ```
 
-Again, replace `src/index.ts` with the actual path to your main TypeScript file.
-
-This worked perfectly, like using Google + StackOverflow but you get to the answer faster.
+This worked great, like using Google + StackOverflow but you get to the answer faster.
 
 ## Generating the UI
 
