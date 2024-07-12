@@ -1,4 +1,12 @@
-# Building an IMDB Clone with AI: My Journey with Claude
+---
+external: false
+title: "Building an IMDB Clone with AI"
+description: "I recently built an IMDB-like application using Claude, an AI assistant. From crafting a Cloudflare Workers API to setting up a Nuxt.js frontend, Claude guided me through each step, showcasing the power of AI-assisted development. Discover how this approach accelerated my process and helped me write cleaner, more efficient code. "
+date: 2024-07-24
+draft: false
+---
+
+# Building an IMDB Clone with AI
 
 As a developer, I recently embarked on an exciting project to build an IMDB-like application using Claude, an AI assistant, throughout the development process. This experience was eye-opening, showcasing both the power and limitations of AI-assisted development. 
 
