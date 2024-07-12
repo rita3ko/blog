@@ -21,7 +21,9 @@ Okay, so let me take you through my journey, complete with the actual prompts us
 
 My journey began with a simple prompt:
 
-> Write me an API using Cloudflare Workers, Hono, TypeScript, and Cloudflare's D1 database for storing movies, the actors in them, and the synopsis of the movie.
+```
+Write me an API using Cloudflare Workers, Hono, TypeScript, and Cloudflare's D1 database for storing movies, the actors in them, and the synopsis of the movie.
+```
 
 Claude's response was impressively comprehensive. Here's a snippet of the code it generated:
 
@@ -62,7 +64,9 @@ One of the most impressive aspects was how well the generated API worked right o
 
 When I encountered a small issue with running the Worker locally, I prompted Claude directly with the error I was receiving:
 
-> When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
+```
+When I run wrangler deploy I get this error: "✘ [ERROR] Missing entry-point: The entry-point should be specified via the command line (e.g. `wrangler deploy path/to/script`) or the `main` config field."
+```
 
 Claude's response was legit, helping me update my wrangler.toml:
 
@@ -82,14 +86,18 @@ This worked great, like using Google + StackOverflow but you get to the answer f
 ## Generating the UI
 
 For the UI, I gave Claude the following prompt: 
-> can you add a ui that uses nuxt and shadcn?
+```
+can you add a ui that uses nuxt and shadcn?
+```
 
 Not very verbose! 
 
 It came back with instructions on instantiating a Nuxt project, content to add to my CSS file, adding new pages such as `Pages/index.vue` for the meat of the application...
 
 At times it got a little lazy, for example, it generated the `Button` component for me but left me to my own devices for some of the others: 
-> Create similar files for Card, CardHeader, CardTitle, and CardContent components in the `components/ui` directory.
+```
+Create similar files for Card, CardHeader, CardTitle, and CardContent components in the `components/ui` directory.
+```
 
 So I asked it to generate those for me in a follow up prompt. 
 
@@ -97,7 +105,9 @@ So I asked it to generate those for me in a follow up prompt.
 
 While the API was nearly perfect, the frontend required more iteration. For instance, when setting up the Nuxt.js frontend, I encountered a CORS error (classic!). I prompted:
 
-> Ah now I'm running into a CORS error
+```
+Ah now I'm running into a CORS error
+```
 
 Claude handled CORS better than most human developers I know:
 
@@ -133,7 +143,9 @@ There were a couple snags I ran into with local dev but all in all manageable. I
 Since we built the API first, it was managed in an entirely separate directory but I wanted it to be part of a single cohesive project. Claude handled this too pretty well. I asked it to give me step by step instructions so I didn't have to meddle with manually moving around files and folders.
 
 Prompt: 
-> can you give me the commands to move the api directory structure i've already created to the new monorepo folder?
+```
+can you give me the commands to move the api directory structure i've already created to the new monorepo folder?
+```
 
 Output: 
 ```
