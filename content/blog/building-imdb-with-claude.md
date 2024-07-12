@@ -5,10 +5,7 @@ description: "I recently built an IMDB-like application using Claude, an AI assi
 date: 2024-07-24
 draft: false
 ---
-
-# Building an IMDB Clone with AI
-
-As a developer, I recently embarked on an exciting project to build an IMDB-like application using Claude, an AI assistant, throughout the development process. This experience was eye-opening, showcasing both the power and limitations of AI-assisted development. 
+I recently met with someone 
 
 You can check out the final result here:
 - **Live Application:** [imdb.ritakozlov.com](https://imdb.ritakozlov.com)
@@ -72,9 +69,7 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
    
    Run the deploy command with the path to your main script, like this:
 
-   ```
-   wrangler deploy src/index.ts
-   ```
+   ` wrangler deploy src/index.ts `
 
    Replace `src/index.ts` with the actual path to your main TypeScript file.
 
@@ -82,7 +77,7 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
 
    Open your `wrangler.toml` file and add a `main` field that points to your entry file:
 
-   ```toml
+   toml
    name = "your-worker-name"
    main = "src/index.ts"
    compatibility_date = "2023-01-01"
@@ -91,12 +86,12 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
    binding = "DB"
    database_name = "your_database_name"
    database_id = "your_database_id"
-   ```
+   
 
    Again, replace `src/index.ts` with the actual path to your main TypeScript file.
-   ```
+```
 
-   This solution worked perfectly, like using Google + StackOverflow but you get to the answer faster.
+   This worked perfectly, like using Google + StackOverflow but you get to the answer faster.
 
    ## Challenges and Iterations
 
