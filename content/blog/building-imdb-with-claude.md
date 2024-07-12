@@ -72,7 +72,7 @@ Claude quickly provided a solution:
 This error occurs because Wrangler can't find the entry point for your Worker. There are two ways to resolve this:
 
 
-> 1. Specify the entry point in the command line:
+1. Specify the entry point in the command line:
    
   Run the deploy command with the path to your main script, like this:
 
@@ -80,12 +80,11 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
 
    Replace `src/index.ts` with the actual path to your main TypeScript file.
 
-  2. Specify the entry point in your `wrangler.toml` file:
+2. Specify the entry point in your `wrangler.toml` file:
 
     Open your `wrangler.toml` file and add a `main` field that points to your entry file:
 
-```
-   toml
+```toml
    name = "your-worker-name"
    main = "src/index.ts"
    compatibility_date = "2023-01-01"
@@ -96,9 +95,9 @@ This error occurs because Wrangler can't find the entry point for your Worker. T
    database_id = "your_database_id"
 ```
 
-   > Again, replace `src/index.ts` with the actual path to your main TypeScript file.
+Again, replace `src/index.ts` with the actual path to your main TypeScript file.
 
-   This worked perfectly, like using Google + StackOverflow but you get to the answer faster.
+This worked perfectly, like using Google + StackOverflow but you get to the answer faster.
 
 ## Generating the UI
 
@@ -122,9 +121,9 @@ While the API was nearly perfect, the frontend required more iteration. For inst
 
 Claude handled CORS better than most human developers I know:
 
-> To resolve this, you need to configure your Cloudflare Worker (your API) to allow requests from your frontend application. Here's how you can modify your API to handle CORS:
+To resolve this, you need to configure your Cloudflare Worker (your API) to allow requests from your frontend application. Here's how you can modify your API to handle CORS:
 
-> 1. Update your API code (likely in your `src/index.ts` or similar file in your `packages/api` directory):
+1. Update your API code (likely in your `src/index.ts` or similar file in your `packages/api` directory):
 
 ```typescript
 import { Hono } from 'hono'
