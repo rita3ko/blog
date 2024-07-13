@@ -2,7 +2,7 @@
 external: false
 title: "Building an IMDB Clone with AI"
 description: "I recently built an IMDB-like application using Claude, an AI assistant. From crafting a Cloudflare Workers API to setting up a Nuxt.js frontend, Claude guided me through each step, showcasing the power of AI-assisted development. Discover how this approach accelerated my process and helped me write cleaner, more efficient code. "
-date: 2024-07-24
+date: 2024-07-12
 draft: false
 ---
 I recently met with someone who was telling me about how they were using AI to build applications in new languages they'd never used before. I was intrigued, impressed, and even a little embarrassed that I wasn't flexing my AI muscles to the same extend. Meanwhile, as a manager, it's always hard to find time to build stuff, and when I do find a bit of time to spare, if it goes toward getting stuck, writing tedious boilerplate, or debugging minor issues, I rarely get to the gratifying part of shipping. 
