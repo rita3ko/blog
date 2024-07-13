@@ -11,6 +11,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^11.0.1",
     "@astrojs/prism": "^1.0.2",
     "@astrojs/react": "^3.6.0",
     "@astrojs/rss": "^2.0.0",
