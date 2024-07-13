@@ -2,6 +2,9 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import react from '@astrojs/react';
+
+
 
 /* 
   We are doing some URL mumbo jumbo here to tell Astro what the URL of your website will be.
@@ -35,5 +38,7 @@ export default defineConfig({
     tailwind({
       config: { applyBaseStyles: false },
     }),
+    react(),
   ],
+  output: 'server'
 });

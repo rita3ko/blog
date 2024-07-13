@@ -1,0 +1,23 @@
+---
+// src/pages/og-image-debug.astro
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Image Debug</title>
+</head>
+<body>
+  <h1>OG Image Debug</h1>
+  <img src="/api/og-image?title=Test%20Title" alt="OG Image" />
+  <p>Check the browser network tab and server console for more information.</p>
+
+  <script>
+    fetch('/api/og-image?title=Test%20Title')
+      .then(response => response.text())
+      .then(text => console.log('API Response:', text))
+      .catch(error => console.error('Error:', error));
+  </script>
+</body>
+</html>
