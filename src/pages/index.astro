@@ -1,23 +1,13 @@
 ---
-import { readAll } from "../lib/markdoc/read";
 import PageMeta from "../components/PageMeta.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import Intro from "../components/Intro.astro";
-import { blog } from "../lib/markdoc/frontmatter.schema";
+import { getCollection, getEntry } from 'astro:content';
 import { SITE_TITLE } from "../config";
 
-const posts = await readAll({
-  directory: "blog",
-  frontmatterSchema: blog,
+const posts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
 });
-
-const sortedPosts = posts
-  .filter((p) => p.frontmatter.draft !== true)
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
 ---
 
 <PageLayout>
@@ -28,9 +18,9 @@ const sortedPosts = posts
   <section slot="main">
     <ul>
       {
-        sortedPosts.map((post) => {
+        posts.map((post) => {
           const formattedDate = new Date(
-            post.frontmatter.date
+          post.data.date
           ).toLocaleDateString("en-us", {
             year: "numeric",
             month: "short",
@@ -39,9 +29,9 @@ const sortedPosts = posts
           return (
             <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
               <div class="title">
-                {post.frontmatter.external ? (
+                {post.data.external ? (
                   <a
-                    href={post.frontmatter.url}
+                    href={post.data.url}
                     target="_blank"
                     class="unset
                         transition-[background-size] duration-300 
@@ -50,14 +40,14 @@ const sortedPosts = posts
                         from-primary-pink to-primary-pink dark:from-primary-pink dark:to-primary-pink
                       "
                   >
-                    <span>{post.frontmatter.title}</span>
+                    <span>{post.data.title}</span>
                     <span>
                       <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
                     </span>
                   </a>
                 ) : (
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${post.data.slug}`}
                     class="unset
                         transition-[background-size] duration-300 
                         bg-gradient-to-r bg-left-bottom bg-no-repeat
@@ -65,12 +55,12 @@ const sortedPosts = posts
                         from-primary-pink to-primary-pink dark:from-primary-pink dark:to-primary-pink
                       "
                   >
-                    {post.frontmatter.title}
+                    {post.data.title}
                   </a>
                 )}
               </div>
               <div class="text-text-muted text-sm italic pt-1">
-                <time datetime={post.frontmatter.date.toISOString()}>
+                <time datetime={post.data.date}>
                   {formattedDate}
                 </time>
               </div>
