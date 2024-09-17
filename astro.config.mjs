@@ -35,5 +35,6 @@ export default defineConfig({
     tailwind({
       config: { applyBaseStyles: false },
     }),
+    og(),
   ],
 });

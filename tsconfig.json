@@ -3,6 +3,8 @@
   "display": "theme/bubblegum",
   "compilerOptions": {
     "types": ["astro/client"],
-    "baseUrl": "."
+    "baseUrl": ".",
+    "verbatimModuleSyntax": true
   }
 }
+
