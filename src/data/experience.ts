@@ -62,7 +62,7 @@ export const experiences: Experience[] = [
   },
   {
     company: "6sense",
-    location: "San Francisco Bay Area",
+    location: "San Francisco, CA",
     type: "work",
     summary: "At 6sense, I designed and developed the first iteration of the 2sense product, creating canonical synchronization across multiple CRM systems and data sources using map reduce. The system brought immediate predictive value to customers.\n\nI built the internal tooling that enabled customer success to onboard new customers efficiently, developing both the React UI and Django backend. This helped scale up customer deployments and reduced technical bottlenecks in the onboarding process.",
     roles: [
