@@ -1,0 +1,211 @@
+---
+import type { Experience } from '../data/experience';
+
+interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props;
+
+const workExperiences = experiences.filter(exp => exp.type === 'work');
+const education = experiences.filter(exp => exp.type === 'education');
+---
+
+<div class="timeline-container">
+  <div class="timeline-line"></div>
+  
+  {workExperiences.map((company) => (
+    <div class="company-section mb-12">
+      <h3 class="text-3xl font-bold mb-4">{company.company}</h3>
+      {company.location && (
+        <div class="text-text-muted mb-2">{company.location}</div>
+      )}
+      {company.summary && (
+        <div class="text-text-muted mb-6 text-lg">{company.summary}</div>
+      )}
+      
+      <div class="roles-container">
+        {company.roles.map((role) => (
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-content">
+              <h4 class="text-lg text-text-muted">{role.title}</h4>
+              <div class="text-sm text-text-muted italic">
+                {new Date(role.startDate).toLocaleDateString('en-US', { 
+                  month: 'short',
+                  year: 'numeric'
+                })} - {
+                  role.endDate === 'present' 
+                    ? 'Present'
+                    : new Date(role.endDate).toLocaleDateString('en-US', { 
+                        month: 'short',
+                        year: 'numeric'
+                      })
+                }
+              </div>
+              {role.description && (
+                <p class="mt-2 text-text-muted">{role.description}</p>
+              )}
+              {role.bulletPoints && (
+                <ul class="list-disc ml-4 mt-2 space-y-1">
+                  {role.bulletPoints.map(point => (
+                    <li class="text-text-muted text-base">{point}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <h2 class="text-2xl font-bold mb-6 mt-12">Education</h2>
+  {education.map((school) => (
+    <div class="company-section">
+      <h3 class="text-3xl font-bold mb-4">{school.company}</h3>
+      {school.location && (
+        <div class="text-text-muted mb-4">{school.location}</div>
+      )}
+      {school.roles.map((role) => (
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
+          </div>
+          <div class="timeline-content">
+            <h4 class="text-lg text-text-muted">{role.title}</h4>
+            <div class="text-sm text-text-muted italic">
+              {new Date(role.startDate).toLocaleDateString('en-US', { 
+                month: 'short',
+                year: 'numeric'
+              })} - {
+                new Date(role.endDate).toLocaleDateString('en-US', { 
+                  month: 'short',
+                  year: 'numeric'
+                })
+              }
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+
+<style>
+  .timeline-container {
+    position: relative;
+    padding-left: 3rem;
+    margin: 2rem 0;
+    text-transform: lowercase;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 22px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #e5e7eb;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -40px;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ec4899;
+    border-radius: 50%;
+    transform: translateX(-0.5px);
+  }
+
+  .timeline-content {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.5s ease;
+    margin-left: 1rem;
+  }
+
+  .timeline-item:not(.active) .timeline-content {
+    opacity: 0.3;
+    transform: translateX(-20px);
+  }
+
+  .company-section {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .roles-container {
+    margin-left: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: lowercase;
+  }
+
+  .company-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-item h4 {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+  }
+
+  .timeline-content .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .timeline-content p {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  .timeline-content ul {
+    margin-top: 0.75rem;
+  }
+
+  .timeline-content li {
+    line-height: 1.5;
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+      rootMargin: '-20% 0px -20% 0px'
+    }
+  );
+
+  document.querySelectorAll('.timeline-item').forEach((item) => {
+    observer.observe(item);
+  });
+</script>
