@@ -17,7 +17,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: "Cloudflare",
-    location: "San Francisco, CA",
+    location: "New York, NY",
     type: "work",
     summary: "I lead product for Cloudflare's developer platform, and have been working on it since its inception. I started as a solutions engineer, helping some of Cloudflare's first true enterprise customers onboard onto the service. When I first got to experience Workers, I realized that's how software should be built — enabling developers to write code without having to worry about the underlying infrastructure. I spent the past 7 years helping shape what such  a serverless platform would look like — what are the right primitives, and what's the right develoepr experience.",
     roles: [
