@@ -1,0 +1,17 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+import Timeline from "../components/Timeline.astro";
+import { experiences } from '../data/experience';
+import { SITE_TITLE } from "../config";
+---
+
+<PageLayout>
+  <PageMeta title={`${SITE_TITLE} | Resume`} slot="meta" />
+  <Fragment slot="main">
+    <div class="prose prose-sm md:prose-base lg:prose-lg dark:prose-invert">
+      <h1 class="text-3xl font-bold mb-8">rita kozlov - resume</h1>
+      <Timeline experiences={experiences} />
+    </div>
+  </Fragment>
+</PageLayout>
